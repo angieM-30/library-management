@@ -19,9 +19,9 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <div class="alert alert-info">
+                    {{-- <div class="alert alert-info">
                         Sample table page
-                    </div>
+                    </div> --}}
 
                     <div class="card">
                         <div class="card-body p-0">
@@ -29,17 +29,21 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Name</th>
+                                        <th>School ID No.</th>
                                         <th>Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                    </tr>
-                                @endforeach
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->school_id }}</td>
+                                            <td>{{ $user->email }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

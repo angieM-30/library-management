@@ -13,9 +13,9 @@
                     </span>
                 @enderror
                 <input type="text" name="school_id" placeholder="School ID No." required />
-                <input type="email" name="sorsu_email" class="@error('sorsu_email') is-invalid @enderror"
-                    placeholder="Sorsu Email" required />
-                @error('sorsu_email')
+                <input type="email" name="email" class="@error('email') is-invalid @enderror" placeholder="Sorsu Email"
+                    required />
+                @error('email')
                     <span class="error invalid-feedback">
                         {{ $message }}
                     </span>
@@ -66,6 +66,7 @@
                     <span>Click on "Sign-In" button if you already have an account </span>
                 </div>
                 <div class="overlay-panel overlay-right">
+                    <img src="{{ asset('images/open-book.png') }}" alt="open_book">
                     <h1>Hello, Friend!</h1>
                     <p>Enter the realm of knowledge and explore</p>
                     <button class="ghost" id="signUp">Sign Up</button>

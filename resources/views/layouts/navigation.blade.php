@@ -11,7 +11,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
+            <li class="nav-item  {{ request()->routeIs('home') ? 'nav-item-active' : '' }}">
                 <a href="{{ route('home') }}" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
@@ -21,8 +21,8 @@
             </li>
 
             @if (auth()->user()->role == 'admin')
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link">
+                <li class="nav-item {{ request()->routeIs('users.*') ? 'nav-item-active' : '' }}">
+                    <a href="{{ route('users.index') }}" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             {{ __('Users') }}
@@ -40,8 +40,8 @@
                 </a>
             </li> --}}
             <li class="nav-header">Book Management</li>
-            <li class="nav-item">
-                <a href="{{-- route('users.index') --}}" class="nav-link">
+            <li class="nav-item {{ request()->routeIs('books.*') ? 'nav-item-active' : '' }}">
+                <a href="{{ route('books.index') }}" class="nav-link">
                     <i class="nav-icon fa fa-book" aria-hidden="true"></i>
                     <p>
                         {{ __('Books') }}

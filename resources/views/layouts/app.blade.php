@@ -4,15 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'SORSU-BC Library Management System') }}</title>
 
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
-    <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/open-book.png') }}" type="image/x-icon">
+    <style>
+        .nav-item-active {
+            background-color: #6e7174;
+            color: white;
+            border-radius: 3px;
+        }
+    </style>
     @yield('styles')
 </head>
 

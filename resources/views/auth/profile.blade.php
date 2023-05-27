@@ -44,16 +44,33 @@
                                 </div>
 
                                 <div class="input-group mb-3">
-                                    <input type="email" name="sorsu_email"
-                                        class="form-control @error('sorsu_email') is-invalid @enderror"
-                                        placeholder="{{ __('Email') }}"
-                                        value="{{ old('sorsu_email', auth()->user()->sorsu_email) }}" required>
+                                    <input type="text" name="school_id"
+                                        class="form-control @error('school_id') is-invalid @enderror"
+                                        placeholder="{{ __('School ID') }}"
+                                        value="{{ old('school_id', auth()->user()->school_id) }}" required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-id-badge"></span>
+                                        </div>
+                                    </div>
+                                    @error('school_id')
+                                        <span class="error invalid-feedback">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <input type="email" name="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}"
+                                        required>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-envelope"></span>
                                         </div>
                                     </div>
-                                    @error('sorsu_email')
+                                    @error('email')
                                         <span class="error invalid-feedback">
                                             {{ $message }}
                                         </span>

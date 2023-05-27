@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!User::where('sorsu_email', 'supadmin@example.com')->first()) {
+        if (!User::where('email', 'supadmin@example.com')->first()) {
             $user = User::create([
                 'name' => 'Librarian',
-                'sorsu_email' => 'admin@example.com',
+                'email' => 'admin@example.com',
                 'role' => 'admin',
                 'password' => Hash::make('admin1234'),
             ]);

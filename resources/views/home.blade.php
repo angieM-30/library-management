@@ -26,13 +26,13 @@
                                     <!-- small box -->
                                     <div class="small-box bg-info">
                                         <div class="inner">
-                                            <h3>150</h3>
-                                            <p>New Orders</p>
+                                            <h3>{{ $totalBooks }}</h3>
+                                            <p>Total Books</p>
                                         </div>
                                         <div class="icon">
-                                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                            <i class="fa fa-book" aria-hidden="true"></i>
                                         </div>
-                                        <a href="#" class="small-box-footer">More info <i
+                                        <a href="{{ route('books.index') }}" class="small-box-footer">More info <i
                                                 class="fas fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
@@ -56,13 +56,13 @@
                                     <!-- small box -->
                                     <div class="small-box bg-warning">
                                         <div class="inner">
-                                            <h3>44</h3>
-                                            <p>User Registrations</p>
+                                            <h3>{{ $totalUsers }}</h3>
+                                            <p>Total Users</p>
                                         </div>
                                         <div class="icon">
                                             <i class="fa fa-user-plus" aria-hidden="true"></i>
                                         </div>
-                                        <a href="#" class="small-box-footer">More info <i
+                                        <a href="{{ route('users.index') }}" class="small-box-footer">More info <i
                                                 class="fas fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
