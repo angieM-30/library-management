@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +20,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -51,7 +51,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'school_id' => ['nullable', 'string', 'max:255'],
+            'sorsu_email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'ends_with:@sorsu.edu.ph'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +65,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // dd($data);
+
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            'school_id' => $data['school_id'],
+            'sorsu_email' => $data['sorsu_email'],
             'password' => Hash::make($data['password']),
+            'role' => 'user',
         ]);
     }
 }
