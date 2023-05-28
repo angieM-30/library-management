@@ -73,6 +73,16 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label>Genre <span class="text-muted font-italic">(Optional)</span></label>
+                                            <input type="text" class="form-control @error('genre') is-invalid @enderror"
+                                                value="{{ old('genre') }}" name="genre" placeholder="Genre">
+                                            @error('genre')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
                                             <label>Publisher <span class="text-muted font-italic">(Optional)</span></label>
                                             <input type="text"
                                                 class="form-control @error('publisher') is-invalid @enderror"

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -24,10 +25,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [BookController::class, 'index'])->name('books.index');
         Route::get('create', [BookController::class, 'create'])->name('books.create');
         Route::post('/', [BookController::class, 'store'])->name('books.store');
-        Route::get('/show/{book}', [BookController::class, 'show'])->name('books.show');
         Route::get('/edit/{book}', [BookController::class, 'edit'])->name('books.edit');
         Route::put('/update/{book}', [BookController::class, 'update'])->name('books.update');
         Route::delete('/delete/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+    });
+
+    Route::prefix('borrowers')->group(function () {
+        Route::get('/', [BorrowerController::class, 'index'])->name('borrowers.index');
+        Route::get('create', [BorrowerController::class, 'create'])->name('borrowers.create');
+        Route::post('/', [BorrowerController::class, 'store'])->name('borrowers.store');
+        Route::get('/edit/{borrower}', [BorrowerController::class, 'edit'])->name('borrowers.edit');
+        Route::put('/update/{borrower}', [BorrowerController::class, 'update'])->name('borrowers.update');
+        Route::delete('/delete/{borrower}', [BorrowerController::class, 'destroy'])->name('borrowers.destroy');
     });
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');

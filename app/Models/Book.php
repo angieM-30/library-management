@@ -25,4 +25,13 @@ class Book extends Model
     protected $casts = [
         'publication_date' => 'date',
     ];
+
+    public function borrowers()
+    {
+        return $this->hasMany(Borrower::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'borrowers');
+    }
 }
