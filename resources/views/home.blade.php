@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-body">
                             <p class="card-text">
-                                {{ __('You are logged in!') }}
+                                {{-- {{ __('You are logged in!') }} --}}
                             </p>
 
                             <div class="row">

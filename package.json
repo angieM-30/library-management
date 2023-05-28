@@ -15,5 +15,8 @@
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.56.1",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "sweetalert2": "^11.7.5"
     }
 }

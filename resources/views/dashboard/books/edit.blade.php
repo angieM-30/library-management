@@ -16,14 +16,15 @@
     </div>
 
     <div class="content">
-        <form action="{{ route('books.store') }}" method="POST">
+        <form action="{{ route('books.update', $book->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card card-secondary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Books</h3>
+                                <h3 class="card-title">Edit Book</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -31,7 +32,7 @@
                                         <div class="form-group">
                                             <label>Title</label>
                                             <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                                value="{{ old('title') }}" name="title" placeholder="Enter title of book"
+                                                value="{{ $book->title }}" name="title" placeholder="Enter title of book"
                                                 required>
                                             @error('title')
                                                 <span class="invalid-feedback" role="alert">
@@ -42,7 +43,7 @@
                                         <div class="form-group">
                                             <label>Author</label>
                                             <input type="text" class="form-control @error('author') is-invalid @enderror"
-                                                value="{{ old('author') }}" name="author" placeholder="Author" required>
+                                                value="{{ $book->author }}" name="author" placeholder="Author" required>
                                             @error('author')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -52,7 +53,7 @@
                                         <div class="form-group">
                                             <label>ISBN</label>
                                             <input type="text" class="form-control @error('isbn') is-invalid @enderror"
-                                                value="{{ old('isbn') }}" name="isbn" placeholder="ISBN" required>
+                                                value="{{ $book->isbn }}" name="isbn" placeholder="ISBN" required>
                                             @error('isbn')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -63,7 +64,7 @@
                                             <label>Description <span
                                                     class="text-muted font-italic">(Optional)</span></label>
                                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Description"
-                                                rows="3">{{ old('description') }}</textarea>
+                                                rows="3">{{ $book->description }}</textarea>
                                             @error('description')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -76,7 +77,7 @@
                                             <label>Publisher <span class="text-muted font-italic">(Optional)</span></label>
                                             <input type="text"
                                                 class="form-control @error('publisher') is-invalid @enderror"
-                                                value="{{ old('publisher') }}" name="publisher" placeholder="Publisher">
+                                                value="{{ $book->publisher }}" name="publisher" placeholder="Publisher">
                                             @error('publisher')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -88,8 +89,8 @@
                                                     class="text-muted font-italic">(Optional)</span></label>
                                             <input type="date"
                                                 class="form-control @error('publication_date') is-invalid @enderror"
-                                                value="{{ old('publication_date') }}" name="publication_date"
-                                                placeholder="Publication Date">
+                                                value="{{ $book->publication_date->format('Y-m-d') }}"
+                                                name="publication_date" placeholder="Publication Date">
                                             @error('publication_date')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -100,7 +101,7 @@
                                             <label>Quantity</label>
                                             <input type="number"
                                                 class="form-control @error('quantity') is-invalid @enderror"
-                                                value="{{ old('quantity') }}" name="quantity" placeholder="Quantity"
+                                                value="{{ $book->quantity }}" name="quantity" placeholder="Quantity"
                                                 required>
                                             @error('quantity')
                                                 <span class="invalid-feedback" role="alert">
@@ -111,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-info">Update</button>
                                 </div>
                             </div>
                         </div>

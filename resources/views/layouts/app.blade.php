@@ -9,6 +9,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/open-book.png') }}" type="image/x-icon">
     <style>
@@ -106,8 +107,9 @@
     @vite('resources/js/app.js')
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
-
+    <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
     @yield('scripts')
+
 </body>
 
 </html>
