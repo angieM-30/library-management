@@ -34,15 +34,6 @@ class BorrowerController extends Controller
         return view('dashboard.borrowers.create', compact('users', 'books', 'borrowers'));
     }
 
-    public function approve(Borrower $borrower)
-    {
-        $borrower->status = 'approved';
-        $borrower->borrowed_at = now();
-        $borrower->save();
-
-        return redirect()->route('borrowers.index')->with('success', 'Borrower request approved successfully.');
-    }
-
     public function edit(Borrower $borrower)
     {
         $users = User::where('role', '!=', 'admin')->get();
@@ -130,6 +121,16 @@ class BorrowerController extends Controller
         return redirect()->route('borrowers.index')->with('success', 'Borrower record deleted successfully.');
     }
 
+    public function approve(Borrower $borrower)
+    {
+        $borrower->status = 'approved';
+        $borrower->quantity = 1;
+        $borrower->borrowed_at = now();
+        $borrower->save();
+
+        return redirect()->route('borrowers.index')->with('success', 'Borrower request approved successfully.');
+    }
+
     public function requestBorrow(Book $book)
     {
         $user = auth()->user();
@@ -147,7 +148,7 @@ class BorrowerController extends Controller
         $data = [
             'user_id' => $user->id,
             'book_id' => $book->id,
-            'quantity' => 1,
+            'quantity' => 0,
             'status' => 'pending',
             'borrowed_at' => now(),
         ];

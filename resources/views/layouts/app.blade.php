@@ -114,17 +114,6 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
     <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
-    <script>
-        function showBorrowModal(title, author, isbn) {
-            // Set the book details in the modal
-            document.getElementById('bookTitle').textContent = 'Title: ' + title;
-            document.getElementById('bookAuthor').textContent = 'Author: ' + author;
-            document.getElementById('bookISBN').textContent = 'ISBN: ' + isbn;
-
-            // Show the modal
-            document.getElementById('borrowModalButton').click();
-        }
-    </script>
     @yield('scripts')
 
 </body>

@@ -90,11 +90,8 @@
                                             <td>{{ $book->genre }}</td>
                                             <td>
                                                 @if (auth()->user()->role == 'user')
-                                                    <a href="#" class="btn btn-sm btn-success" data-toggle="modal"
-                                                        data-target="#borrowModal" data-book-id="{{ $book->id }}"
-                                                        data-book-title="{{ $book->title }}"
-                                                        data-book-author="{{ $book->author }}"
-                                                        data-book-isbn="{{ $book->isbn }}">Request to Borrow</a>
+                                                    <a href="{{ route('borrowers.request', $book) }}"
+                                                        class="btn btn-sm btn-success">Request to Borrow</a>
                                                 @endif
                                                 @if (auth()->user()->role == 'admin')
                                                     <a href="{{ route('books.edit', $book) }}"
@@ -114,6 +111,53 @@
                                             <td colspan="7" class="text-center">No books found.</td>
                                         </tr>
                                     @endforelse
+                                    <!-- Modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="borrowModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="borrowModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="borrowModalLabel">Request to Borrow</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="borrowForm"
+                                                        action="{{ route('borrowers.request', ['book' => ':bookId']) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <label>Title</label>
+                                                            <input type="text" class="form-control" id="book_title"
+                                                                name="book_title" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Author</label>
+                                                            <input type="text" class="form-control" id="book_author"
+                                                                name="book_author" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>ISBN</label>
+                                                            <input type="text" class="form-control" id="book_isbn"
+                                                                name="book_isbn" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary">Request to
+                                                                Borrow</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </tbody>
                             </table>
                         </div>
@@ -123,48 +167,6 @@
                             {{ $books->links() }}
                         </div>
                     </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="borrowModal" tabindex="-1" role="dialog"
-                        aria-labelledby="borrowModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="borrowModalLabel">Request to Borrow</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('borrowers.request', $book->id) }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" class="form-control" name="book_title"
-                                                value="{{ $book->title }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Author</label>
-                                            <input type="text" class="form-control" name="book_author"
-                                                value="{{ $book->author }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ISBN</label>
-                                            <input type="text" class="form-control" name="book_isbn"
-                                                value="{{ $book->isbn }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Request to Borrow</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <!-- /.row -->
