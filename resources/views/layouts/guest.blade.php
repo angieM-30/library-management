@@ -16,6 +16,14 @@
     <!-- Theme style -->
     {{-- <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <style>
+        .login-page {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.437), rgba(255, 255, 255, 0.644)), url({{ asset('images/sorsu_lib_bulan.jpg') }});
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
