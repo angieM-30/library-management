@@ -24,6 +24,13 @@
             width: 200px;
             overflow: cover;
         }
+
+        .content-wrapper {
+            background-image: url({{ asset('images/librarian.png') }});
+            background-repeat: no-repeat;
+            background-position: bottom left;
+            background-size: 500px;
+        }
     </style>
     @yield('styles')
 </head>

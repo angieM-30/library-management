@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body card-bcc">
                             <p class="card-text">
                                 {{-- {{ __('You are logged in!') }} --}}
                             </p>
@@ -61,7 +61,7 @@
                                             <div class="icon">
                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('borrowers.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -70,13 +70,13 @@
                                         <!-- small box -->
                                         <div class="small-box bg-danger">
                                             <div class="inner">
-                                                <h3>65</h3>
-                                                <p>Unique Visitors</p>
+                                                <h3>{{ $totalPending }}</h3>
+                                                <p>Pending Approval for Borrowers</p>
                                             </div>
                                             <div class="icon">
                                                 <i class="fa fa-chart-pie" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('borrowers.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -85,10 +85,8 @@
                             @endif
                         </div>
                     </div>
-                </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-@endsection
+            <!-- /.content -->
+        @endsection

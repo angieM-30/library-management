@@ -21,8 +21,9 @@ class HomeController extends Controller
         $totalBooks = $books->sum('quantity');
 
         $totalUsers = User::all()->count();
-        $totalBorrowers = Borrower::all()->count();
+        $totalBorrowers = Borrower::where('status', 'approved')->count();
+        $totalPending = Borrower::where('status', 'pending')->count();
 
-        return view('home', compact('totalBooks', 'totalUsers', 'totalBorrowers'));
+        return view('home', compact('totalBooks', 'totalUsers', 'totalBorrowers', 'totalPending'));
     }
 }
