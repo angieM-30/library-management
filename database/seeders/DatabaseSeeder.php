@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         if (!User::where('email', 'supadmin@example.com')->first()) {
             $user = User::create([
                 'name' => 'Librarian',
-                'email' => 'admin@example.com',
+                'email' => 'librarian@sorsu.edu.ph',
                 'role' => 'admin',
                 'password' => Hash::make('admin1234'),
             ]);
