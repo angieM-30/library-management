@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <style>
         .login-page {
-            background-image: linear-gradient(rgba(255, 255, 255, 0.437), rgba(255, 255, 255, 0.644)), url({{ asset('images/sorsu_lib_bulan.jpg') }});
+            background-image: linear-gradient(rgba(255, 255, 255, 0.664), rgba(255, 255, 255, 0.673)), url({{ asset('images/sorsu_lib_bulan.jpg') }});
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
