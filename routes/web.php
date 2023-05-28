@@ -37,6 +37,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{borrower}', [BorrowerController::class, 'edit'])->name('borrowers.edit');
         Route::put('/update/{borrower}', [BorrowerController::class, 'update'])->name('borrowers.update');
         Route::delete('/delete/{borrower}', [BorrowerController::class, 'destroy'])->name('borrowers.destroy');
+
+        Route::post('/request/{book}', [BorrowerController::class, 'requestBorrow'])->name('borrowers.request');
+        Route::match (['get', 'put'], '/approve/{borrower}', [BorrowerController::class, 'approve'])->name('borrowers.approve');
+        Route::match (['get', 'put'], '/return/{borrower}', [BorrowerController::class, 'returnBook'])->name('borrowers.return');
+
     });
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');

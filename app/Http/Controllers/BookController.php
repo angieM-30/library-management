@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Borrower;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -21,8 +22,17 @@ class BookController extends Controller
         }
 
         $books = $query->paginate(10);
+        $bookQty = Book::all();
 
-        return view('dashboard.books.index', compact('books'));
+        foreach ($books as $book) {
+            $borrowedQty = Borrower::whereHas('books', function ($query) use ($book) {
+                $query->where('book_id', $book->id)->where('is_returned', false);
+            })->sum('quantity');
+
+            $book->available_quantity = $book->quantity - $borrowedQty;
+        }
+
+        return view('dashboard.books.index', compact('books', 'bookQty'));
     }
 
     public function create()

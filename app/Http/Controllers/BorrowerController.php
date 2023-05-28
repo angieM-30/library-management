@@ -18,7 +18,6 @@ class BorrowerController extends Controller
 
     public function create()
     {
-
         $users = User::where('role', '!=', 'admin')->get();
         $books = Book::all();
         $borrowers = Borrower::all();
@@ -33,6 +32,15 @@ class BorrowerController extends Controller
         });
 
         return view('dashboard.borrowers.create', compact('users', 'books', 'borrowers'));
+    }
+
+    public function approve(Borrower $borrower)
+    {
+        $borrower->status = 'approved';
+        $borrower->borrowed_at = now();
+        $borrower->save();
+
+        return redirect()->route('borrowers.index')->with('success', 'Borrower request approved successfully.');
     }
 
     public function edit(Borrower $borrower)
@@ -121,4 +129,42 @@ class BorrowerController extends Controller
 
         return redirect()->route('borrowers.index')->with('success', 'Borrower record deleted successfully.');
     }
+
+    public function requestBorrow(Book $book)
+    {
+        $user = auth()->user();
+
+        // check if there is pending request for this book with the same user_id
+        $pendingRequest = Borrower::where('user_id', $user->id)
+            ->where('book_id', $book->id)
+            ->where('status', 'pending')
+            ->first();
+
+        if ($pendingRequest) {
+            return redirect()->route('books.index')->with('error', 'You already have a pending request for this book.');
+        }
+
+        $data = [
+            'user_id' => $user->id,
+            'book_id' => $book->id,
+            'quantity' => 1,
+            'status' => 'pending',
+            'borrowed_at' => now(),
+        ];
+
+        Borrower::create($data);
+
+        return redirect()->route('books.index')->with('success', 'Borrower request sent successfully.');
+    }
+
+    public function returnBook(Borrower $borrower)
+    {
+        $borrower->returned_at = now();
+        $borrower->is_returned = true;
+        $borrower->status = 'returned';
+        $borrower->save();
+
+        return redirect()->route('borrowers.index')->with('success', 'Book returned successfully.');
+    }
+
 }

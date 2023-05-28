@@ -31,7 +31,9 @@
                 </li>
             @endif
 
-            <li class="nav-header">Book Management</li>
+            @if (auth()->user()->role == 'admin')
+                <li class="nav-header">Book Management</li>
+            @endif
             <li class="nav-item {{ request()->routeIs('books.*') ? 'nav-item-active' : '' }}">
                 <a href="{{ route('books.index') }}" class="nav-link">
                     <i class="nav-icon fa fa-book" aria-hidden="true"></i>
@@ -40,18 +42,20 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('borrowers.*') ? 'nav-item-active' : '' }}">
-                <a href="{{ route('borrowers.index') }}" class="nav-link">
-                    <i class="nav-icon fa fa-users" aria-hidden="true"></i>
-                    <p>
-                        {{ __('Borrowers') }}
-                    </p>
-                </a>
-            </li>
+            @if (auth()->user()->role == 'admin')
+                <li class="nav-item {{ request()->routeIs('borrowers.*') ? 'nav-item-active' : '' }}">
+                    <a href="{{ route('borrowers.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-users" aria-hidden="true"></i>
+                        <p>
+                            {{ __('Borrowers') }}
+                        </p>
+                    </a>
+                </li>
+            @endif
 
             <li class="nav-header">The developers</li>
-            <li class="nav-item">
-                <a href="{{-- route('about') --}}" class="nav-link">
+            <li class="nav-item {{ request()->routeIs('about') ? 'nav-item-active' : '' }}">
+                <a href="{{ route('about') }}" class="nav-link">
                     <i class="nav-icon far fa-address-card"></i>
                     <p>
                         {{ __('About us') }}

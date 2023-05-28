@@ -20,12 +20,14 @@
                     </form>
                 </div>
                 {{-- div for add button --}}
-                <div class="col-md-4">
-                    <div class="float-right">
-                        <a href="{{ route('books.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add
-                            Book</a>
+                @if (auth()->user()->role == 'admin')
+                    <div class="col-md-4">
+                        <div class="float-right">
+                            <a href="{{ route('books.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add
+                                Book</a>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -41,6 +43,19 @@
                                 <i class="flaticon2-check-mark icon-md"></i>
                             </div>
                             <div class="alert-text">{{ session('success') }}</div>
+                            <div class="alert-close">
+                                <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-custom alert-danger alert-dismissible fade show" role="alert">
+                            <div class="alert-icon">
+                                <i class="flaticon2-check-mark icon-md"></i>
+                            </div>
+                            <div class="alert-text">{{ session('error') }}</div>
                             <div class="alert-close">
                                 <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
@@ -71,23 +86,32 @@
                                             <td>{{ $book->title }}</td>
                                             <td>{{ $book->author }}</td>
                                             <td>{{ $book->isbn }}</td>
-                                            <td class="text-center">{{ $book->quantity }}</td>
+                                            <td>{{ $book->available_quantity }} out of {{ $book->quantity }}</td>
                                             <td>{{ $book->genre }}</td>
                                             <td>
-                                                <a href="{{ route('books.edit', $book) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="{{ route('books.destroy', $book) }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this book?')">Delete</button>
-                                                </form>
+                                                @if (auth()->user()->role == 'user')
+                                                    <a href="#" class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#borrowModal" data-book-id="{{ $book->id }}"
+                                                        data-book-title="{{ $book->title }}"
+                                                        data-book-author="{{ $book->author }}"
+                                                        data-book-isbn="{{ $book->isbn }}">Request to Borrow</a>
+                                                @endif
+                                                @if (auth()->user()->role == 'admin')
+                                                    <a href="{{ route('books.edit', $book) }}"
+                                                        class="btn btn-sm btn-primary">Edit</a>
+                                                    <form action="{{ route('books.destroy', $book) }}" method="POST"
+                                                        class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Are you sure you want to delete this book?')">Delete</button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">No books found.</td>
+                                            <td colspan="7" class="text-center">No books found.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -97,6 +121,47 @@
 
                         <div class="card-footer">
                             {{ $books->links() }}
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="borrowModal" tabindex="-1" role="dialog"
+                        aria-labelledby="borrowModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="borrowModalLabel">Request to Borrow</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('borrowers.request', $book->id) }}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" class="form-control" name="book_title"
+                                                value="{{ $book->title }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Author</label>
+                                            <input type="text" class="form-control" name="book_author"
+                                                value="{{ $book->author }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ISBN</label>
+                                            <input type="text" class="form-control" name="book_isbn"
+                                                value="{{ $book->isbn }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Request to Borrow</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

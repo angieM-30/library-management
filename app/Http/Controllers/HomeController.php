@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Borrower;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -20,7 +21,8 @@ class HomeController extends Controller
         $totalBooks = $books->sum('quantity');
 
         $totalUsers = User::all()->count();
+        $totalBorrowers = Borrower::all()->count();
 
-        return view('home', compact('totalBooks', 'totalUsers'));
+        return view('home', compact('totalBooks', 'totalUsers', 'totalBorrowers'));
     }
 }

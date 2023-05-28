@@ -59,8 +59,8 @@
                                         <th style="width: 10px;">#</th>
                                         <th>Name of Borrower</th>
                                         <th>Title</th>
-                                        {{-- <th>ISBN</th> --}}
                                         <th class="text-center" style="max-width: 50px;">Qty</th>
+                                        <th>Status</th>
                                         <th>Date Borrowed</th>
                                         <th>Date Returned</th>
                                         <th>Actions</th>
@@ -72,11 +72,25 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $borrower->user->name }}</td>
                                             <td>{{ $borrower->books->title }}</td>
-                                            {{-- <td>{{ $borrower-> }}</td> --}}
                                             <td class="text-center">{{ $borrower->quantity }}</td>
+                                            <td>{{ $borrower->status }}</td>
                                             <td>{{ $borrower->borrowed_at->format('F d, Y') }}</td>
                                             <td>{{ $borrower?->returned_at?->format('F d, Y') ?? '' }}</td>
                                             <td>
+                                                @if ($borrower->status == 'pending')
+                                                    <a href="{{ route('borrowers.approve', $borrower) }}"
+                                                        class="btn btn-sm btn-success">Approve</a>
+                                                    {{-- <form method="POST"
+                                                        action="{{ route('borrowers.approve', $borrower) }}">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <button
+                                                            type="submit"class="btn btn-sm btn-success">Approve</button>
+                                                    </form> --}}
+                                                @elseif($borrower->status == 'approved')
+                                                    <a href="{{ route('borrowers.return', $borrower) }}"
+                                                        class="btn btn-sm btn-warning">Return</a>
+                                                @endif
                                                 <a href="{{ route('borrowers.edit', $borrower) }}"
                                                     class="btn btn-sm btn-primary">Edit</a>
                                                 <form action="{{ route('borrowers.destroy', $borrower) }}" method="POST"
