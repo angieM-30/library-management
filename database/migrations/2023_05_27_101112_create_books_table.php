@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('genre')->nullable();
             $table->string('availability')->nullable();
             $table->integer('quantity');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

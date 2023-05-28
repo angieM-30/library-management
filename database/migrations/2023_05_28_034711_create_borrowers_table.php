@@ -22,7 +22,6 @@ return new class extends Migration
             $table->boolean('is_lost')->default(false);
             $table->boolean('is_damaged')->default(false);
             $table->boolean('is_replaced')->default(false);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

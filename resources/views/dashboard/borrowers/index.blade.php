@@ -12,7 +12,8 @@
                     <form action="{{ route('borrowers.index') }}" method="get">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control  float-right"
-                                placeholder="Search by Title, Author, ISBN, or Genre" value="{{ request()->search }}">
+                                placeholder="Search by Borrower's Name, Book Title, Author, ISBN, or Date Borrowed"
+                                value="{{ request()->search }}">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                             </div>
@@ -22,7 +23,7 @@
                 {{-- div for add button --}}
                 <div class="col-md-4">
                     <div class="float-right">
-                        <a href="{{-- route('borrowers.create') --}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add
+                        <a href="{{ route('borrowers.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add
                             Borrower</a>
                     </div>
                 </div>
@@ -56,9 +57,9 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th style="width: 10px;">#</th>
-                                        <th>Name</th>
+                                        <th>Name of Borrower</th>
                                         <th>Title</th>
-                                        <th>ISBN</th>
+                                        {{-- <th>ISBN</th> --}}
                                         <th class="text-center" style="max-width: 50px;">Qty</th>
                                         <th>Date Borrowed</th>
                                         <th>Date Returned</th>
@@ -70,10 +71,11 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $borrower->user->name }}</td>
-                                            <td>{{ $borrower->book->title }}</td>
-                                            <td>{{ $borrower->book->isbn }}</td>
+                                            <td>{{ $borrower->books->title }}</td>
+                                            {{-- <td>{{ $borrower-> }}</td> --}}
                                             <td class="text-center">{{ $borrower->quantity }}</td>
-                                            <td>{{ $borrower->date_borrowed }}</td>
+                                            <td>{{ $borrower->borrowed_at->format('F d, Y') }}</td>
+                                            <td>{{ $borrower?->returned_at?->format('F d, Y') ?? '' }}</td>
                                             <td>
                                                 <a href="{{ route('borrowers.edit', $borrower) }}"
                                                     class="btn btn-sm btn-primary">Edit</a>
