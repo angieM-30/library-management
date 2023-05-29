@@ -99,7 +99,7 @@
                                                     class="text-muted font-italic">(Optional)</span></label>
                                             <input type="date"
                                                 class="form-control @error('publication_date') is-invalid @enderror"
-                                                value="{{ $book->publication_date->format('Y-m-d') }}"
+                                                value="{{ $book->publication_date?->format('Y-m-d') ?? '' }}"
                                                 name="publication_date" placeholder="Publication Date">
                                             @error('publication_date')
                                                 <span class="invalid-feedback" role="alert">
