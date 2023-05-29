@@ -83,6 +83,15 @@
                                     <!-- ./col -->
                                 </div>
                             @endif
+
+                            @if (auth()->user()->role == 'user')
+                                <h1 class="text-center">Welcome to SORSU-BC Library Management System</h1>
+                                <p class="text-center">
+                                    This is a library management system for Sorsogon State University - Bulan Campus. This
+                                    system is designed to help the librarian to manage the books and the borrowers of the
+                                    library, keeping track of the records of the books and respective borrowers.
+                                </p>
+                            @endif
                         </div>
                     </div>
                     <!-- /.row -->
